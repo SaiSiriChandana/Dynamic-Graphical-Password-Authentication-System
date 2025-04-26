@@ -1,0 +1,75 @@
+{% load static %}
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Graphical Password Authentication System For Web Security</title>
+<meta name="keywords" content="" />
+<meta name="Premium Series" content="" />
+<link href="{% static 'default.css' %}" rel="stylesheet" type="text/css" media="screen" />
+<script language="javascript">
+    function validate(formObj) {
+        if (formObj.t1.value.length == 0) {
+            alert("Password image must be uploaded");
+            formObj.t1.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+</head>
+<body>
+<!-- start header -->
+<div id="header">
+    <div id="logo">
+        <h1><span><center>Graphical Password Authentication System For Web Security</center></span></h1>
+    </div>
+    <div id="menu">
+        <ul id="main">
+            <li><a href="{% url 'Reset' %}"><font size="3" color="black">Reset Password</a></li>
+            <li><a href="{% url 'index' %}"><font size="3" color="black">Logout</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="wrapper">
+    <!-- start page -->
+    <div id="page">
+        <form name="frm" method="post" action="ResetAction" enctype="multipart/form-data" onsubmit="return validate(this);">
+            <!-- start content -->
+            <div id="content">
+                <div class="flower">
+                    <center><img src="{% static 'images/tra.jpg' %}" alt="" width="660" height="100" /></center>
+                </div>
+                <br/><br/>
+                <div class="flower">
+                    <center><h1>Reset Password Screen</h1></center>
+                </div>
+                <br/>
+
+                {% csrf_token %}
+                
+                <center><font size="3" color="red">{{ data|safe }}</font></center>
+
+                <table align="right">
+                    <tr>
+                        <td><font size="3" color="black">Password</td>
+                        <td><input type="file" name="t1" size="25" required /></td>
+                    </tr>
+                    <tr>
+                        <td><font size="3" color="black">Set a Hint (optional)</td>
+                        <td><input type="text" name="hint" size="25" placeholder="Enter a hint for your password"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Reset Password"></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- end content -->
+            <div style="clear: both;">&nbsp;</div>
+        </form>
+    </div>
+    <!-- end page -->
+</div>
+</body>
+</html>
